@@ -70,9 +70,27 @@ var saveApiData  =  async function(){
   
    try{
    let newArray = await getApiData() 
-   await Dog.bulkCreate(newArray.dogs).then(() => console.log("dogs data have been saved"))
-   await Temperament.bulkCreate(newArray.temperaments).then(() => console.log("temperaments data have been saved"))
    
+   await Temperament.bulkCreate(newArray.temperaments).then(() => console.log("temperaments data have been saved"))
+   //await Dog.bulkCreate(newArray.dogs).then(() => console.log("dogs data have been saved"))   
+
+   for (let i=0 ; i < newArray.dogs.length; i++){
+      //console.log(newArray.dogs)
+      let doggie = await Dog.create({
+         id:newArray.dogs[i].id,
+         image:newArray.dogs[i].image,
+         name:newArray.dogs[i].name,
+         height:newArray.dogs[i].weight,
+         weight:newArray.dogs[i].height,
+         life_span:newArray.dogs[i].life_span
+      })
+
+      let idTemperament = await Temperament.findByPk(newArray.dogs[i].id)
+      //llenando la tabla intermedia
+      await doggie.addTemperament(idTemperament.id)
+   }
+   console.log("dogs data have been saved")
+
    }catch(e){
       return {msg:e.message}
    }
