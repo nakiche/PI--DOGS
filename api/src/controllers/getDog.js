@@ -1,15 +1,18 @@
 const axios =require ('axios')
 
-var getDogByName =  async function(dogName){
-	
-      try {
+var getDog =  async function(){
+
+	try {
+         //let i =1;
          let dogs = [] 
-        let response= await axios(`https://api.thedogapi.com/v1/breeds/search?q=${dogName}`)
-  
+         
+     
+        let response= await axios(`https://api.thedogapi.com/v1/breeds`)
+        //dogs.push(response)
         dogs = response.data.map(res=>{
         return ({
          id:res.id,
-         image:res.reference_image_id ? `https://cdn2.thedogapi.com/images/${res.reference_image_id}.jpg` : 'no_image' ,
+         image:res.image.url,
          name:res.name,
          height:res.weight.metric,
          weight:res.height.metric,
@@ -17,13 +20,13 @@ var getDogByName =  async function(dogName){
          temperament: res.temperament ? res.temperament.split(', ') : 'none'
             })
          })
-  	
         return dogs
-        
+
       }catch(e)
       {
          return {msg:e.message}
       }
+
 }
 
-module.exports = getDogByName;
+module.exports = getDog;
