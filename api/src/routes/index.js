@@ -89,30 +89,49 @@ router.get('/temperaments', async (req, res) => {
 	}	
 });
 
+router.post('/dogs', async (req, res) => {
+ let {id,name,image,min_height,max_height,
+ min_weight,max_weight,min_life_span,
+ max_life_span,temperament}=req.body
 
-router.post('/create/temp', async (req, res) => {
+ if(!id || !name || !image || !min_height || !max_height 
+ 	|| !min_weight || !max_weight || !min_life_span 
+ 	|| !max_life_span || !temperament || temperament.length < 1 ) {
+
+	res.status(400).json({error: 'faltan datos'})
+ }else{
+
   try {
-		const temp = await await Temperament.create({
-         
-		  id: 12121,
-		  name: [
-		    'Clever',       'Spunky',
-		    'Outgoing',     'Friendly',
-		    'Affectionate', 'Lively',
-		    'Alert',        'Loyal',
-		    'Independent',  'Playful',
-		    'Gentle',       'Intelligent',
-		    'Happy',        'Active',
-		    'Courageous'
-		  ]
-		
-         
+		let dog = await  Dog.create({
+        "id": id,
+        "image": image,
+        "name": name,
+        "height": `${min_height} - ${max_height}`,
+        "weight": `${min_weight} - ${max_weight}`,
+        "life_span": `${min_life_span} - ${max_life_span}`,   		
       })
-		res.status(200).json(temp);
+		let DogTemperament = await Temperament.create({
+        "id": id,
+        "name": temperament
+      })
+		//llenando la tabla intermedia
+		await dog.addTemperament(id)
+
+		res.status(200).json(await Dog.findAll({
+							where: {id: {[Op.eq]: id}},
+							include: {model: Temperament,
+							attributes: ['name'],
+							through: {
+				        		attributes: []
+				      				}
+								}
+								})
+							);
 	}catch(e)
 	{
 		res.status(400).json(e.message);
 	}	
+   }	
 });
 
 router.use('/', (req, res) => {

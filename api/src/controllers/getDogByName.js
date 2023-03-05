@@ -1,12 +1,15 @@
 const axios =require ('axios')
+const {Dog,Temperament,Op}  = require('../db.js');
 
 var getDogByName =  async function(dogName){
 	
       try {
-         let dogs = [] 
+         let dogsApi = [] 
+         let dogsDb = []
+
         let response= await axios(`https://api.thedogapi.com/v1/breeds/search?q=${dogName}`)
   
-        dogs = response.data.map(res=>{
+        dogsApi = response.data.map(res=>{
         return ({
          id:res.id,
          image:res.reference_image_id ? `https://cdn2.thedogapi.com/images/${res.reference_image_id}.jpg` : 'no_image' ,
@@ -14,11 +17,28 @@ var getDogByName =  async function(dogName){
          height:res.weight.metric,
          weight:res.height.metric,
          life_span:res.life_span,
-         temperament: res.temperament ? res.temperament.split(', ') : 'none'
+         Temperaments: res.temperament ? [{name:res.temperament.split(', ')}] : [{name:'none'}]
             })
          })
+
+        dogsDb = await Dog.findAll({
+							where: {
+								name: {
+									[Op.iLike]: `%${dogName}%`,
+									  }
+									},
+							include: {model: Temperament,
+							attributes: ['name'],
+							through: {
+				        		attributes: []
+				      				}
+								}
+							})
+
+        // console.log(dogName)
+        // console.log(dogsDb)
   	
-        return dogs
+        return dogsApi.concat(dogsDb)
         
       }catch(e)
       {

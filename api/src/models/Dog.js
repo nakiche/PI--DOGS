@@ -27,7 +27,10 @@ module.exports = (sequelize) => {
     },
     life_span:{
       type:DataTypes.STRING,
-      allowNull:false
+      allowNull:false,
+      set(value) {//SET como quiero que se guarde
+        this.setDataValue('life_span', value + ' years');
+      }
     }
   },{
     timestamps: false
