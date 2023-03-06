@@ -34,14 +34,10 @@ var getDogByName =  async function(dogName){
 				      				}
 								}
 							})
-
-        // console.log(dogName)
-        // console.log(dogsDb)
   	
         return dogsApi.concat(dogsDb)
         
-      }catch(e)
-      {
+      }catch(e){
          return {msg:e.message}
       }
 }

@@ -1,12 +1,9 @@
 const axios =require ('axios')
 const {Dog,Temperament}  = require('../db.js');
-//const { Character } = require('../models/Character');
-
 
 var getApiData =  async function(){
 	//return new Promise  function(resolve, reject){
       try {
-        
         // let dogs = [] 
          let temperaments =[]
       
@@ -37,12 +34,7 @@ var getApiData =  async function(){
         return ({
          id:res.id,
          name:res.temperament.split(', ')
-         
-
-         //id:res.id,
-      
-         
-            })
+                })
         }
          })
 
@@ -66,8 +58,7 @@ var getApiData =  async function(){
          //dogs,
          temperaments
          } 
-      }catch(e)
-      {
+      }catch(e){
          return {msg:e.message}
       }
 }

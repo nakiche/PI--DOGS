@@ -4,12 +4,11 @@ const {Dog,Temperament,Op}  = require('../db.js');
 var getDog =  async function(){
 
 	try {
-         //let i =1;
          let dogsApi = [] 
          let dogsDb = []
      
         let response= await axios(`https://api.thedogapi.com/v1/breeds`)
-        //dogs.push(response)
+
         dogsApi = response.data.map(res=>{
         return ({
          id:res.id,
@@ -34,11 +33,9 @@ var getDog =  async function(){
 
         return dogsApi.concat(dogsDb)
 
-      }catch(e)
-      {
+      }catch(e){
          return {msg:e.message}
       }
-
 }
 
 module.exports = getDog;

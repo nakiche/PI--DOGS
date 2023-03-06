@@ -3,8 +3,7 @@ const { QueryTypes } = require('sequelize');
 const {Dog,Temperament,Op,conn}  = require('../db.js');
 const getDog = require ('../controllers/getDog.js');
 const getDogByName = require ('../controllers/getDogByName.js');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const postDog = require ('../controllers/postDog.js');
 
 const router = Router();
 
@@ -39,17 +38,7 @@ router.get('/dogs/:idRaza', async (req, res) => {
 	try {
 		let{idRaza}=req.params
 		let dog = await getDog()
-		// const dog = await Dog.findAll({
-		// 	where: {id: {[Op.eq]: idRaza}},
-		// 	include: {model: Temperament,
-		// 	attributes: ['name'],
-		// 	through: {
-        // 		attributes: []
-      	// 		}
-		// 	}
-		// })
 		let newArray =dog.filter(c=>c.id==idRaza)
-		//console.log(newArray.length)
 		if(newArray.length>0) {
 			res.status(200).json(dog.filter(c=>c.id==idRaza)); 
 		}else{
@@ -57,7 +46,6 @@ router.get('/dogs/:idRaza', async (req, res) => {
 		}
 
 	}catch(e)
-
 	{
 		res.status(400).json(e.message);
 	}	
@@ -69,9 +57,6 @@ router.get('/temperaments/unnest', async (req, res) => {
 		const temperaments = await conn.query('SELECT DISTINCT name (unnest(name)) as name FROM "Temperaments" ORDER BY name',{
 			type: QueryTypes.SELECT
 		})
-		// const temperaments = await Temperament.findAll({
-		// 
-		// })
 		res.status(200).json(temperaments);
 	}catch(e)
 	{
@@ -90,48 +75,11 @@ router.get('/temperaments', async (req, res) => {
 });
 
 router.post('/dogs', async (req, res) => {
- let {id,name,image,min_height,max_height,
- min_weight,max_weight,min_life_span,
- max_life_span,temperament}=req.body
-
- if(!id || !name || !image || !min_height || !max_height 
- 	|| !min_weight || !max_weight || !min_life_span 
- 	|| !max_life_span || !temperament || temperament.length < 1 ) {
-
-	res.status(400).json({error: 'faltan datos'})
- }else{
-
   try {
-		let dog = await  Dog.create({
-        "id": id,
-        "image": image,
-        "name": name,
-        "height": `${min_height} - ${max_height}`,
-        "weight": `${min_weight} - ${max_weight}`,
-        "life_span": `${min_life_span} - ${max_life_span}`,   		
-      })
-		let DogTemperament = await Temperament.create({
-        "id": id,
-        "name": temperament
-      })
-		//llenando la tabla intermedia
-		await dog.addTemperament(id)
-
-		res.status(200).json(await Dog.findAll({
-							where: {id: {[Op.eq]: id}},
-							include: {model: Temperament,
-							attributes: ['name'],
-							through: {
-				        		attributes: []
-				      				}
-								}
-								})
-							);
-	}catch(e)
-	{
+		res.status(200).json(await postDog(req.body));
+	}catch(e){
 		res.status(400).json(e.message);
 	}	
-   }	
 });
 
 router.use('/', (req, res) => {
