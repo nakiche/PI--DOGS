@@ -5,16 +5,23 @@ import Form from "./components/form/Form.jsx";
 import Welcome from "./components/welcome/Welcome.jsx";
 import Dogs from "./components/dogs/Dogs.jsx";
 import { Route, HashRouter as Router } from 'react-router-dom';
-import {dogs} from "./ExampledB.js"
-
-
+//import {dogs} from "./ExampledB.js"
+import {getDogsByName}  from '../src/actions/index.js';
+import { useDispatch,useSelector } from 'react-redux'
 
 
 function App() {  
-//const location = useLocation()    
+const dispatch = useDispatch();
 
-let onSearch = ()=>{
+const dogDetailByName  = useSelector((state) =>state.dogByName);
 
+let onSearch = async (name)=>{
+    try{
+    await dispatch(getDogsByName(name));
+    }catch(e)
+    {
+      window.alert(e)
+    }
 }  
 
 
@@ -22,12 +29,12 @@ let onSearch = ()=>{
   return (
     <div className='App'>
      {/*{console.log(location.pathname)}*/}
-
     {/*<div>{ location.pathname ===! '/' && 
       <Nav />
           } 
     </div>   */}
     {/*configurar el componente Nav condicional*/}
+    
     <Router>
 
       <Route exact path="/">
@@ -36,19 +43,22 @@ let onSearch = ()=>{
     
       <Route path="/home">
        
-         <Nav onSearch={onSearch} />
+         <Nav onSearch={onSearch} dogDetailByName={dogDetailByName}  />
+         <hr />
         <div className="divDogs">  
-          <Dogs dogs={dogs}/>
+          <Dogs />
         </div>
       </Route>
 
       <Route path="/detail/:id">
         <Nav onSearch={onSearch}/>
+        <hr />
         <Detail />
       </Route>
 
       <Route path="/form">
         <Nav onSearch={onSearch}/>
+        <hr />
         <Form />
       </Route>
 

@@ -18,20 +18,18 @@ const Buttons = styled.button`
 
 export default function SearchBar({onSearch}) {
 
-//export default function SearchBar() {  
-
-const [dog, setDog] = useState('');
+//creando un estado
+const [dogName, setDogName] = useState('');
 
 const handleInputChange = (event) => {
-     setDog(event.target.value)
+     setDogName(event.target.value)
     }
 
    return (
       <form onSubmit={(e)=>{
-        //console.log('este hay en e:' ,e)
         e.preventDefault();
-        onSearch(dog);
-        setDog('');
+        onSearch(dogName);
+        setDogName('');
         const inputDOM =document.getElementById('task-input');
         inputDOM.value='';
         ;

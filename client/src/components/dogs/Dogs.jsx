@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
 import Dog from '../dog/Dog.jsx';
 import  {getDogs}  from '../../actions/index.js';
+
 
 export class Dogs extends Component {
 
@@ -10,12 +10,12 @@ export class Dogs extends Component {
         this.props.getDogs() 
     }
 
-
   render() {
-    
-    //console.log (this.props)
+   
     return (
-        this.props.dogs && this.props.dogs.map((c,b)=>
+     
+         this.props.dogs && this.props.dogs.map((c,b)=>
+             
              <Dog key={b}
               id={c.id}
               name={c.name}
@@ -25,7 +25,8 @@ export class Dogs extends Component {
             //onClose={props.onClose}
            />
          )
-      
+          
+
     );
   }
 }

@@ -42,9 +42,16 @@ const IMG = styled.img`
     border-radius: 25px;
 `;
 
+const Buttons = styled.button`
+  border-radius: 5px;
+  margin: 7px;
+  padding: 3px;
+  background-color:#FF787A;
+  color:white;  
+`;
 
 
-export default function Dog({id,name,temperaments,image,weight}) {  
+export default function NavCard({id,name,temperaments,image,weight,onClose}) {  
 
    let newArray=[]
    if (temperaments[0].name.length > 1 )
@@ -56,7 +63,11 @@ export default function Dog({id,name,temperaments,image,weight}) {
 
    return (
       <DivCard>
-      
+      <Buttons onClick={(e)=>{
+         e.preventDefault();
+         
+         onClose(id);
+         }}>X</Buttons>
       <Link to= {`/detail/${id}`}>          
        {
          <InsideCard>  
