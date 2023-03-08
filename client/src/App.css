@@ -3,10 +3,27 @@
   margin: 0 auto;
 }
 
+li {
+ margin:2px;
+ text-decoration: none;
+}
+
+a{
+  text-decoration: none;
+}
 .divDogs{
    display: flex;
    flex-wrap:wrap;
    justify-content :space-around;
+}
+
+label {
+  padding: 5px;
+  margin:5 px;
+}
+
+input {
+  margin:5 px;
 }
 
 /*.clasePrueba  {

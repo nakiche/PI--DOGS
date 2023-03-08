@@ -8,12 +8,12 @@ import { useParams } from 'react-router';
 const DivCard = styled.div`
    border-radius: 25px;
    border: solid 2px;
-   //display:inline-block;
+   display:inline-block;
    padding:5px;
    background-color:white;
    box-shadow: 0 0 0 0.1rem black;
    //position:relative;
-   //width : 90%;
+   width : 50%;
    margin:5px;
 `;
 

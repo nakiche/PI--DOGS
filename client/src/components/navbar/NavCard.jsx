@@ -10,7 +10,7 @@ const DivCard = styled.div`
    background-color:white;
    box-shadow: 0 0 0 0.1rem black;
    //position:relative;
-   width : 20%;
+   width: 30%;
    margin:5px;
 `;
 

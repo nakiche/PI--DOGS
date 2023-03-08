@@ -17,7 +17,7 @@ const dogDetailByName  = useSelector((state) =>state.dogByName);
 
 let onSearch = async (name)=>{
     try{
-    await dispatch(getDogsByName(name));
+      await dispatch(getDogsByName(name));
     }catch(e)
     {
       window.alert(e)
@@ -45,9 +45,9 @@ let onSearch = async (name)=>{
        
          <Nav onSearch={onSearch} dogDetailByName={dogDetailByName}  />
          <hr />
-        <div className="divDogs">  
+        
           <Dogs />
-        </div>
+        
       </Route>
 
       <Route path="/detail/:id">

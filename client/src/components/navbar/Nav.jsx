@@ -28,15 +28,20 @@ const DivDogs = styled.div`
 export default function Nav({onSearch,dogDetailByName}) {  
 
 
-   const [doggies, setDoggies] = React.useState([]);
+   const [doggies, setDoggies] = React.useState("");
 
    React.useEffect(() => {
    setDoggies(dogDetailByName)
    }, [dogDetailByName]);
    
-
-    let onClose = async (id)=>{
+    let onClose =  (id)=>{
+      console.log(doggies)
+      // let indice= doggies.findIndex(e=>e.id===id)
+      // doggies.splice(indice,1)
+      //setDoggies(doggies)
       setDoggies(doggies.filter(c => c.id !== id))
+      let indice= doggies.findIndex(e=>e.id===id)
+      doggies.splice(indice,1)
    }  
 
    return (
