@@ -54,7 +54,8 @@ router.get('/dogs/:idRaza', async (req, res) => {
 router.get('/temperaments/unnest', async (req, res) => {
 	try {
 		// Use raw SQL queries to unnest the object
-		const temperaments = await conn.query('SELECT DISTINCT name (unnest(name)) as name FROM "Temperaments" ORDER BY name',{
+		const temperaments = await conn.query(`SELECT DISTINCT name (unnest(name)) as name FROM "Temperaments"  WHERE NOT 'none' =ANY(name) ORDER BY name`,
+		{
 			type: QueryTypes.SELECT
 		})
 		res.status(200).json(temperaments);

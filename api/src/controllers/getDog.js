@@ -17,7 +17,8 @@ var getDog =  async function(){
          height:res.weight.metric,
          weight:res.height.metric,
          life_span:res.life_span,
-         Temperaments: res.temperament ? [{name:res.temperament.split(', ')}] : [{name:'none'}]
+         Temperaments: res.temperament ? [{name:res.temperament.split(', ')}] : [{name:'none'}],
+         fromApi: true
             })
          })
 

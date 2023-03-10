@@ -35,11 +35,10 @@ var postDog =  async function({id,name,image,min_height,max_height,
 				      				}
 								}
 							})
-		return dogTemperament
-	}catch(e){
+		return `Breed: ${name}, was succesfully created` 
+		}catch(e){
 		return {msg:e.message}
 	}
  }	
-  	
 }
-module.exports = postDog;
+module.exports = postDog; 

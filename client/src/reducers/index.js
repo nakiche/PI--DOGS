@@ -1,4 +1,4 @@
-import{ GET_DOGS,GET_DOGS_ID,GET_DOGS_NAME,GET_TEMPERAMENTS } from "../actions/index.js";
+import{ GET_DOGS,GET_DOGS_ID,GET_DOGS_NAME,GET_TEMPERAMENTS,CREATE_DOG,SORT_BY_ORIGIN } from "../actions/index.js";
 
 
 const initialState = {
@@ -32,6 +32,20 @@ function rootReducer(state = initialState,action){
 		return{
 			...state,
 			dogTemperaments:action.payload //
+		}
+	}
+	if(action.type===CREATE_DOG){
+		return{
+			...state,
+			dogs:action.payload //
+		}
+	}
+
+	if(action.type===SORT_BY_ORIGIN){
+		let originArr = state.dogs.filter(e=>e.fromApi===true)
+		return{
+			...state,
+			dogs:originArr //
 		}
 	}
 	return state;

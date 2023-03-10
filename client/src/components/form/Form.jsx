@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import  {getTemperaments}  from '../../actions/index.js';
+import  {getTemperaments,createDog}  from '../../actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
-//import Validate from './Validate.jsx';
+import Validate from './Validate.jsx';
+import Validation from './Validation.jsx';
 
 
 const DivCard = styled.div`
@@ -25,7 +26,7 @@ const InsideCard = styled.div`
    margin:15px;
    `;
 
-const Buttons = styled.button`
+const Buttons = styled.input`
   border-radius: 5px;
   margin: 10px;
   padding: 5px;
@@ -35,9 +36,9 @@ const Buttons = styled.button`
   font-family:cursive;
 `;
 
-export default function Form() {  
+export default function Form({handleSubmit}) {  
 const dispatch = useDispatch();
-
+let response = "";
 const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
 
 React.useEffect(() => {
@@ -63,7 +64,7 @@ const [errors, setErrors] = React.useState({
    max_height:'',
    min_weight:'',
    max_weight:'',
-   temperaments:''
+   temperament:''
 
 });
 
@@ -75,13 +76,9 @@ const [dogData, setDogData] = React.useState({
   max_height:'',
   min_weight:'',
   max_weight:'',
-  temperaments:'',
+  temperament:'',
 });
 
-const handleSubmit = (dogData) =>{
-  //login(userData);
-  //dispachar la accion de REDUX 
-}
 
 const handleInputChange  = (evento) =>{
   setDogData({
@@ -90,13 +87,22 @@ const handleInputChange  = (evento) =>{
     });
 
 
-  // setErrors(
-  //  Validate({
-  //     ...userData,
-  //     [evento.target.name]: evento.target.value,
-  //  })
-  // );
+  setErrors(
+   Validate({
+      ...dogData,
+      [evento.target.name]: evento.target.value,
+   })
+  );
  } 
+
+ // const validation  = (dogData) =>{
+ //  setErrors(
+ //   Validation({
+ //      dogData
+   
+ //   })
+ //  );
+ // } 
 
  const handleSelectChange = (e) => {
   let value = Array.from(e.target.selectedOptions, option => option.value);
@@ -104,15 +110,36 @@ const handleInputChange  = (evento) =>{
   //this.setState({values: value});
   setDogData({
       ...dogData,
-   temperaments:value
+   temperament:value
    })
+
+   setErrors(
+   Validate({
+      ...dogData,
+      [e.target.name]: e.target.value,
+   })
+  );
 }
   
-
+//console.log('errors',errors)
    return (
       <DivCard>
         <h1>Create a new dog</h1>
-        <InsideCard>   
+        {/*<InsideCard>   */}
+        <form onSubmit={(e)=>{
+              e.preventDefault();
+              //validation(dogData)
+              handleSubmit(dogData);
+              setDogData({name: '', 
+              min_life_span: '' ,
+              max_life_span:'',
+              min_height:'',
+              max_height:'',
+              min_weight:'',
+              max_weight:'',
+              temperament:'',});
+              e.target.reset();
+            }}>
          <div>
             <label htmlFor="">Name:</label>
             <input 
@@ -184,22 +211,27 @@ const handleInputChange  = (evento) =>{
 
           <div>
              <label htmlFor="">Temperaments:</label>
-             <select name="temperaments" id="" multiple onChange={handleSelectChange}>
+             <select name="temperament" id="" multiple onChange={handleSelectChange}>
                     {/*<option value="Temperaments" disabled>choose temeperaments</option>*/}
                     {dogTemperaments && dogTemperaments.map((c,b)=>
                         <option value={c} key={b}>{c}</option>
                      )} 
                     
             </select>
+            <p style={{fontSize: '15px',color: 'red'}}>{errors.temperament}</p> 
           </div>
          
-        </InsideCard>
+        {/*</InsideCard>*/}
         <div>
-            <Buttons onClick={(e)=>{
-              e.preventDefault();
-              //handleSubmit(userData);
-            }}>Save</Buttons>
+          {/*  <input  disabled= "{dogData.name && dogData.min_life_span &&
+                                dogData.max_life_span&& dogData.min_height &&
+                                dogData.max_height && dogData.min_weight &&                                dogData.max_weight && dogData.temperament &&
+                                ? false : true}" type='submit' value='Save'
+            />*/}
+
+          <input type="submit" />
          </div>
+      </form>
 
       </DivCard>
    );

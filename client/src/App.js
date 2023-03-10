@@ -6,7 +6,7 @@ import Welcome from "./components/welcome/Welcome.jsx";
 import Dogs from "./components/dogs/Dogs.jsx";
 import { Route, HashRouter as Router } from 'react-router-dom';
 //import {dogs} from "./ExampledB.js"
-import {getDogsByName}  from '../src/actions/index.js';
+import {getDogsByName,createDog}  from '../src/actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
 
 
@@ -23,6 +23,17 @@ let onSearch = async (name)=>{
       window.alert(e)
     }
 }  
+
+let handleSubmit = async(dogData) =>{
+  //dispachar la accion de REDUX 
+   try{
+   let response =await dispatch(createDog(dogData))
+   window.alert(response.payload)
+   }catch(e)
+   {
+    window.alert(e)
+   }
+}
 
 
 
@@ -59,7 +70,7 @@ let onSearch = async (name)=>{
       <Route path="/form">
         <Nav onSearch={onSearch}/>
         <hr />
-        <Form />
+        <Form handleSubmit={handleSubmit}/>
       </Route>
 
     </Router>

@@ -18,6 +18,8 @@ const Buttons = styled.button`
 
 export default function SearchBar({onSearch}) {
 
+
+
 //creando un estado
 const [dogName, setDogName] = useState('');
 
