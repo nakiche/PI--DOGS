@@ -67,7 +67,8 @@ export default function Nav({onSearch,dogDetailByName}) {
               name={c.name}
               temperaments={c.Temperaments}
               image={c.image}
-              weight={c.weight}
+              min_weight={c.min_weight}
+              max_weight={c.max_weight}
               onClose={onClose}
              />
              

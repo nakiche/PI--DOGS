@@ -67,9 +67,8 @@ const Detail = (props) => {
     // ...
   }
   fetchData(); 
-
   },[id]);
-  
+
     
  if(Object.entries(dogDetail).length>0){
     let newArray=[]
@@ -88,7 +87,7 @@ const Detail = (props) => {
             <h4>{dogDetail[0].id}</h4>
             <H2>{dogDetail[0].name}</H2>
             <h4>{dogDetail[0].height} inches</h4>
-            <h4>{dogDetail[0].weight} pounds</h4>
+            <h4>{dogDetail[0].min_weight} - {dogDetail[0].max_weight} pounds</h4>
             <P>{newArray.toString()}</P>
             <h4>{dogDetail[0].life_span}</h4>
 

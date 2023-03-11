@@ -44,7 +44,7 @@ const IMG = styled.img`
 
 
 
-export default function Dog({id,name,temperaments,image,weight}) {  
+export default function Dog({id,name,temperaments,image,min_weight,max_weight}) {  
 
    let newArray=[]
    if (temperaments[0].name.length > 1 )
@@ -63,7 +63,7 @@ export default function Dog({id,name,temperaments,image,weight}) {
             <IMG  src={image} alt={image} />
             <H2>{name}</H2>
             <P>{newArray.toString()}</P>
-            <h4>{weight} pounds</h4>
+            <h4>{min_weight} - {max_weight} pounds</h4>
          </InsideCard>
        }
       </Link> 

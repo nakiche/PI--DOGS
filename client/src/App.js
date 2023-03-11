@@ -14,7 +14,7 @@ function App() {
 const dispatch = useDispatch();
 
 const dogDetailByName  = useSelector((state) =>state.dogByName);
-
+console.log(dogDetailByName)
 let onSearch = async (name)=>{
     try{
       await dispatch(getDogsByName(name));

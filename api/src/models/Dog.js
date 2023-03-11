@@ -16,12 +16,19 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {//SET como quiero que se guarde
+        this.setDataValue('name', value.charAt(0).toUpperCase()+ value.slice(1));
+      }
     },
-    height:{
-      type:DataTypes.STRING,
+    min_weight:{
+      type:DataTypes.INTEGER,
       allowNull:false
     },
-    weight:{
+    max_weight:{
+      type:DataTypes.INTEGER,
+      allowNull:false
+    },
+    height:{
       type:DataTypes.STRING,
       allowNull:false
     },

@@ -51,7 +51,7 @@ const Buttons = styled.button`
 `;
 
 
-export default function NavCard({id,name,temperaments,image,weight,onClose}) {  
+export default function NavCard({id,name,temperaments,image,min_weight,max_weight,onClose}) {  
 
    let newArray=[]
    if (temperaments[0].name.length > 1 )
@@ -74,7 +74,7 @@ export default function NavCard({id,name,temperaments,image,weight,onClose}) {
             <IMG  src={image} alt={image} />
             <H2>{name}</H2>
             <P>{newArray.toString()}</P>
-            <h4>{weight} pounds</h4>
+            <h4>{min_weight}-{max_weight} pounds</h4>
          </InsideCard>
        }
       </Link> 

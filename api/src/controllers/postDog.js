@@ -8,16 +8,17 @@ var postDog =  async function({id,name,image,min_height,max_height,
 	if (!id || !name || !image || !min_height || !max_height 
  	|| !min_weight || !max_weight || !min_life_span 
  	|| !max_life_span || !temperament || temperament.length < 1 ) {
-
+ 		
 	throw new Error ('Faltan datos')
  	}else{
 	try{
 		let dog = await  Dog.create({
         "id": id,
-        "image": image,
+        "image": 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png',
         "name": name,
+        "min_weight": min_weight,
+        "max_weight":max_weight,
         "height": `${min_height} - ${max_height}`,
-        "weight": `${min_weight} - ${max_weight}`,
         "life_span": `${min_life_span} - ${max_life_span}`,   		
       })
 		let DogTemperament = await Temperament.create({
