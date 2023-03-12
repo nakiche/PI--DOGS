@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   margin: 0 auto;
+  font-family: cursive;
 }
 
 li {
@@ -8,11 +9,13 @@ li {
  text-decoration: none;
 }
 
-a{
-  text-decoration: none;
+a:link,a:visited,a:hover {
+text-decoration: none;
+color: black;
 }
+
 .divDogs{
-   display: flex;
+   display: flex; 
    flex-wrap:wrap;
    justify-content :space-around;
 }
@@ -20,6 +23,11 @@ a{
 label {
   padding: 5px;
   margin:5 px;
+}
+
+span {
+  font-size: 0.9rem;
+  color:black;
 }
 
 input {
@@ -42,10 +50,13 @@ input {
   border-right: solid 2px grey;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

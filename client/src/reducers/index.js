@@ -1,4 +1,4 @@
-import{ GET_DOGS,GET_DOGS_ID,GET_DOGS_NAME,GET_TEMPERAMENTS,CREATE_DOG,SORT_BY_ORIGIN } from "../actions/index.js";
+import{ GET_DOGS,GET_DOGS_ID,GET_DOGS_NAME,GET_TEMPERAMENTS,CREATE_DOG,DELETE_SEARCH} from "../actions/index.js";
 
 
 const initialState = {
@@ -41,14 +41,25 @@ function rootReducer(state = initialState,action){
 		}
 	}
 
-	if(action.type===SORT_BY_ORIGIN){
-		let originArr = state.dogs.filter(e=>e.fromApi===true)
+	if(action.type===DELETE_SEARCH){
+		// console.log(action.payload)
+		// let indice= state.dogByName.findIndex(e=>e.id===action.payload)
+		// console.log(indice)
 		return{
 			...state,
-			dogs:originArr //
+			//dogByName:state.dogByName.splice(1,1) 
+			dogByName:state.dogByName.filter(e=>e.id!==action.payload) 
 		}
 	}
-	return state;
+
+	// if(action.type===SORT_BY_ORIGIN){
+	// 	let originArr = state.dogs.filter(e=>e.fromApi===true)
+	// 	return{
+	// 		...state,
+	// 		dogs:originArr //
+	// 	}
+	// }
+	return {...state}
 }
 
 export default rootReducer;

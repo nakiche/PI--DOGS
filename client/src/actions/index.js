@@ -5,7 +5,8 @@ export const GET_DOGS_ID = 'GET_DOGS_ID';
 export const GET_DOGS_NAME = 'GET_DOGS_NAME';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 export const CREATE_DOG = 'CREATE_DOG';
-export const SORT_BY_ORIGIN = 'SORT_BY_ORIGIN'
+//export const SORT_BY_ORIGIN = 'SORT_BY_ORIGIN'
+export const DELETE_SEARCH = 'DELETE_SEARCH'
 
 //inicializamos en 1000 para que los perros creados tengan
 //id mayor a 1000
@@ -103,13 +104,23 @@ export const createDog  = (dogData) => {
   }
 };
 
-export const sortByOrigin  = (SortBy) => {
-  console.log('SORT_BY_ORIGIN')
+// export const sortByOrigin  = (SortBy) => {
+//   console.log('SORT_BY_ORIGIN')
 
    
+//     return ({
+//       type:SORT_BY_ORIGIN,
+//       payload:SortBy
+//     })
+// };
+
+export const deleteSearch = (id) => {
+   console.log('DELETE_SEARCH')
+  // Completa la funcion
     return ({
-      type:SORT_BY_ORIGIN,
-      payload:SortBy
+      type:DELETE_SEARCH,
+      payload:id
     })
-  
-};
+
+
+}

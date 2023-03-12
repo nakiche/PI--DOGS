@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import  {getTemperaments,createDog}  from '../../actions/index.js';
+import  {getTemperaments}  from '../../actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
 import Validate from './Validate.jsx';
-import Validation from './Validation.jsx';
+//import Validation from './Validation.jsx';
 
 
 const DivCard = styled.div`
@@ -17,16 +17,16 @@ const DivCard = styled.div`
    width:50%;
 `;
 
-const InsideCard = styled.div`
-   display: flex;
-   flex-wrap:wrap;
-   flex-direction:row;
-   justify-content: space-between;
-   padding:15px;
-   margin:15px;
-   `;
+// const InsideCard = styled.div`
+//    display: flex;
+//    flex-wrap:wrap;
+//    flex-direction:row;
+//    justify-content: space-between;
+//    padding:15px;
+//    margin:15px;
+//    `;
 
-const Buttons = styled.input`
+const Buttons = styled.button`
   border-radius: 5px;
   margin: 10px;
   padding: 5px;
@@ -38,7 +38,7 @@ const Buttons = styled.input`
 
 export default function Form({handleSubmit}) {  
 const dispatch = useDispatch();
-let response = "";
+
 const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
 
 React.useEffect(() => {
@@ -225,11 +225,14 @@ const handleInputChange  = (evento) =>{
         <div>
           {/*  <input  disabled= "{dogData.name && dogData.min_life_span &&
                                 dogData.max_life_span&& dogData.min_height &&
-                                dogData.max_height && dogData.min_weight &&                                dogData.max_weight && dogData.temperament &&
+                                dogData.max_height && dogData.min_weight &&                               
+                                 dogData.max_weight && dogData.temperament &&
                                 ? false : true}" type='submit' value='Save'
             />*/}
 
-          <input type="submit" />
+          {/*<input type="submit" />
+         */}
+         <Buttons type="submit">Create</Buttons>
          </div>
       </form>
 

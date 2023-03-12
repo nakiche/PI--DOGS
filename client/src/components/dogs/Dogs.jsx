@@ -1,16 +1,22 @@
+import styled from 'styled-components';
 import React  from "react";
 //import { connect } from "react-redux";
 import Dog from '../dog/Dog.jsx';
 import Paginate from '../paginate/Paginate.jsx';
-import  {getDogs,getTemperaments,sortByOrigin}  from '../../actions/index.js';
+import  {getDogs,getTemperaments}  from '../../actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
 
-
-export default function Dogs() {  
+const Select = styled.select`
+   font-family:cursive;
+   text-align:center;
+   width:18%;
+   border-radius:10px;
+   `;
+export default function Dogs({dogTemperaments,doggies}) {  
    const dispatch = useDispatch();
 
    //redux store
-   const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
+   //const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
    //component states
    const [dogs, setDogs] = React.useState({dogs:"",
                                            filtered:[],
@@ -26,36 +32,85 @@ export default function Dogs() {
    const [sort,setSort]=React.useState('');
    const [temperament, setTemperament] = React.useState([]);
 
-   React.useEffect(() => {
-      async function fetchData() {
-       // You can await here
-       await dispatch(getTemperaments()); //temperaments
-       let response =await dispatch(getDogs()); //dogs
-       setDogs({
-         ...dogs,
-         dogs:response.payload
-         })
+   // React.useEffect(() => {
+   //    async function fetchData() {
+   //     // You can await here
+   //     //await dispatch(getTemperaments()); //temperaments
+   //     let response =await dispatch(getDogs()); //dogs
+   //     setDogs({
+   //       ...dogs,
+   //       dogs:response.payload
+   //       })
       
-   }
-   fetchData();
-   },[]);
+   // }
+   // fetchData();
+   // },[]);
 
+   //    React.useEffect(() => {
+   //    async function fetchData() {
+   //     // You can await here
+   //     //await dispatch(getTemperaments()); //temperaments
+       
+   //     setDogs({
+   //       ...dogs,
+   //       dogs:doggies
+   //       })
+      
+   // }
+   // fetchData();
+   // },[doggies]);
+
+   
 
    const handleSelectTemperamentChange = (e) => {
+      console.log (e.target.selectedOptions)
      //let value = Array.from(e.target.selectedOptions, option => option.value);
+     
+
+        if (e.target.value  === 'api'){
+      //let filtered=dogs.filtered.length==0 ? doggies.filter(e=>e.fromApi===true) : dogs.filtered.filter(e=>e.fromApi===true)
+      //filteredData=filteredData.dogs.filter(e=>e.fromApi===true)
+      let filtered= doggies.filter(e=>e.fromApi===true)
+       setDogs({
+          ...dogs,
+       filtered
+      })
+      //return filtered
+      
+    } else if (e.target.value === 'db'){
+      //let filtered=dogs.filtered.length==0 ? doggies.filter(e=>e.fromApi===undefined) : dogs.filtered.filter(e=>e.fromApi===undefined)
+      //filteredData=filteredData.dogs.filter(e=>e.fromApi===undefined)
+       let filtered=doggies.filter(e=>e.fromApi===undefined)
+       if (filtered.length===0) window.alert('No dogs stored in database')
+      setDogs({...dogs,
+         filtered
+      })
+      //return filtered
+    }
+    else if (e.target.value === 'all'){
+          setDogs({...dogs,
+          filtered:[]
+          })
+    // //   filtered=[]
+    // //   return filtered
+     }
+
+   else{
      setTemperament(Array.from(e.target.selectedOptions, option => option.value))
+      }
    }
 
    //using UseEffect to get lastest state
    React.useEffect(() => {
     let filterByTemperament=[]  
    console.log('Temperaments to filter',temperament );
-      for (let i = 0; i < dogs.dogs.length; i++) {
-         let arraySearch=dogs.dogs[i].Temperaments[0].name
-          const found = temperament.some(r=> arraySearch.includes(r)) && filterByTemperament.push(dogs.dogs[i])
+      for (let i = 0; i < doggies.length; i++) {
+         let arraySearch=doggies[i].Temperaments[0].name
+          //const found = temperament.some(r=> arraySearch.includes(r)) && filterByTemperament.push(doggies[i])
+         temperament.some(r=> arraySearch.includes(r)) && filterByTemperament.push(doggies[i])
       }
       setDogs({...dogs,
-            //filtered:dogs.dogs.slice().sort(sortAsc('name')),
+            //filtered:doggies.slice().sort(sortAsc('name')),
             filtered:filterByTemperament
          })
    }, [temperament]);
@@ -64,9 +119,9 @@ export default function Dogs() {
    const handleSortByOrigin = (selection) =>{
    
     if (selection === 'api'){
-      //let filtered=dogs.filtered.length==0 ? dogs.dogs.filter(e=>e.fromApi===true) : dogs.filtered.filter(e=>e.fromApi===true)
+      //let filtered=dogs.filtered.length==0 ? doggies.filter(e=>e.fromApi===true) : dogs.filtered.filter(e=>e.fromApi===true)
       //filteredData=filteredData.dogs.filter(e=>e.fromApi===true)
-      let filtered= dogs.dogs.filter(e=>e.fromApi===true)
+      let filtered= doggies.filter(e=>e.fromApi===true)
        setDogs({
           ...dogs,
        filtered
@@ -74,9 +129,9 @@ export default function Dogs() {
       //return filtered
       
     } else if (selection === 'db'){
-      //let filtered=dogs.filtered.length==0 ? dogs.dogs.filter(e=>e.fromApi===undefined) : dogs.filtered.filter(e=>e.fromApi===undefined)
+      //let filtered=dogs.filtered.length==0 ? doggies.filter(e=>e.fromApi===undefined) : dogs.filtered.filter(e=>e.fromApi===undefined)
       //filteredData=filteredData.dogs.filter(e=>e.fromApi===undefined)
-       let filtered=dogs.dogs.filter(e=>e.fromApi===undefined)
+       let filtered=doggies.filter(e=>e.fromApi===undefined)
        if (filtered.length===0) window.alert('No dogs stored in database')
       setDogs({...dogs,
          filtered
@@ -98,39 +153,39 @@ export default function Dogs() {
   const handleSortByOrder = (selection) =>{
 // if (dogs.filtered.length<1){
    if (selection==='a-z'){
-      //let filtered= dogs.filtered.length==0 ? dogs.dogs.slice().sort(sortAsc('name')) : dogs.filtered.slice().sort(sortAsc('name'))
-      let filtered= dogs.dogs.slice().sort(sortAsc('name'))
+      //let filtered= dogs.filtered.length==0 ? doggies.slice().sort(sortAsc('name')) : dogs.filtered.slice().sort(sortAsc('name'))
+      let filtered= doggies.slice().sort(sortAsc('name'))
       //filteredData=filteredData.dogs.slice().sort(sortAsc('name'))
       setDogs({...dogs,
-            //filtered:dogs.dogs.slice().sort(sortAsc('name')),
+            //filtered:doggies.slice().sort(sortAsc('name')),
             filtered
          })
       
    }else if (selection==='z-a'){
-      //let filtered= dogs.filtered.length==0 ? dogs.dogs.slice().sort(sortDesc('name')) : dogs.filtered.slice().sort(sortDesc('name'))
-      let filtered= dogs.dogs.slice().sort(sortDesc('name'))
+      //let filtered= dogs.filtered.length==0 ? doggies.slice().sort(sortDesc('name')) : dogs.filtered.slice().sort(sortDesc('name'))
+      let filtered= doggies.slice().sort(sortDesc('name'))
       //filteredData=filteredData.dogs.slice().sort(sortDesc('name'))
       setDogs({...dogs,
             filtered
-            //filtered:dogs.dogs.slice().sort(sortDesc('name')),
+            //filtered:doggies.slice().sort(sortDesc('name')),
          }) 
    
    }else if (selection==='g-l'){
-      //let filtered= dogs.filtered.length==0 ? dogs.dogs.slice().sort(sortDesc('name')) : dogs.filtered.slice().sort(sortDesc('name'))
-      let filtered= dogs.dogs.slice().sort(sortDesc('max_weight'))
+      //let filtered= dogs.filtered.length==0 ? doggies.slice().sort(sortDesc('name')) : dogs.filtered.slice().sort(sortDesc('name'))
+      let filtered= doggies.slice().sort(sortDesc('max_weight'))
       //filteredData=filteredData.dogs.slice().sort(sortDesc('name'))
       setDogs({...dogs,
             filtered
-            //filtered:dogs.dogs.slice().sort(sortDesc('name')),
+            //filtered:doggies.slice().sort(sortDesc('name')),
          }) 
    
    }else if (selection==='l-g'){
-      //let filtered= dogs.filtered.length==0 ? dogs.dogs.slice().sort(sortDesc('name')) : dogs.filtered.slice().sort(sortDesc('name'))
-      let filtered= dogs.dogs.slice().sort(sortAsc('max_weight'))
+      //let filtered= dogs.filtered.length==0 ? doggies.slice().sort(sortDesc('name')) : dogs.filtered.slice().sort(sortDesc('name'))
+      let filtered= doggies.slice().sort(sortAsc('max_weight'))
       //filteredData=filteredData.dogs.slice().sort(sortDesc('name'))
       setDogs({...dogs,
             filtered
-            //filtered:dogs.dogs.slice().sort(sortDesc('name')),
+            //filtered:doggies.slice().sort(sortDesc('name')),
          }) 
    
    }
@@ -166,7 +221,7 @@ export default function Dogs() {
   //pagination variables
    const indexOfLastPost = currentPage * postsPerPage;
    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-   const currentPosts = dogs.filtered.length===0 ? dogs.dogs.slice(indexOfFirstPost, indexOfLastPost) : dogs.filtered.slice(indexOfFirstPost, indexOfLastPost)
+   const currentPosts = dogs.filtered.length===0 ? doggies.slice(indexOfFirstPost, indexOfLastPost) : dogs.filtered.slice(indexOfFirstPost, indexOfLastPost)
 
    //console.log(dogs)
   const paginate =  (pageNumber) => {
@@ -178,7 +233,7 @@ export default function Dogs() {
       }
    };
    const nextPage = () => {
-      if (currentPage !== Math.ceil(dogs.dogs.length / postsPerPage)) {
+      if (currentPage !== Math.ceil(doggies.length / postsPerPage)) {
          setCurrentPage(currentPage + 1);
       }
    };
@@ -206,40 +261,48 @@ export default function Dogs() {
 
     return (
     <div> 
-    <select name="temperaments" id="" multiple onChange={(e)=>{
+    <span>Please choose: </span>
+    <Select name="temperaments" id="" multiple size="5" onChange={(e)=>{
          e.preventDefault();
          handleSelectTemperamentChange(e);
          //handleSortByTemperament()
          }}>
-          <option value="">--Sort by temperament--</option>
+         <optgroup label="Sort by Origin">
+             <option value="all">All dogs</option>
+             <option value="api">Api dogs</option>
+             <option value="db">Created dogs</option>
+          </optgroup>     
+          <optgroup label="Sort by temperament">
+          {/*<option value="">Sort by  </option>*/}
                {/*<option value="Temperaments" disabled>choose temeperaments</option>*/}
                {dogTemperaments && dogTemperaments.map((c,b)=>
                       <option value={c} key={b}>{c}</option>
                )} 
-      </select>  
+          </optgroup>     
+      </Select>  
 
-        <select name={api_Db} id="" onChange={(e)=>{
-         setApi_Db(e.target.value)
+        {/*<select name={api_Db} id="" onChange={(e)=>{
+         //setApi_Db(e.target.value)
          e.preventDefault();
          handleSortByOrigin(e.target.value);
          }}>
           <option value="all">--All dogs--</option>
           <option value="api">Api dogs</option>
           <option value="db">Created dogs</option>
-        </select>  
+        </select>  */}
 
-        <select name={sort} id="" onChange={(e)=>{
+        <Select name={sort} id="" onChange={(e)=>{
          e.preventDefault();
          setSort(e.target.value)
          handleSortByOrder(e.target.value)
          }}>
           {/*<option value="none">--Sort by--</option>*/}
-          <option value="a-z">A-z order</option>
-          <option value="z-a">Z-a order</option>
+          <option value="a-z">A-z sort</option>
+          <option value="z-a">Z-a sort</option>
           <option value="l-g">Lesser to greater weight</option>
           <option value="g-l">Greater to lesser weight</option>
 
-        </select>  
+        </Select>  
 
   {dogs ? ( 
      <div className="divDogs">
@@ -258,7 +321,7 @@ export default function Dogs() {
         }  
         <div>
           <Paginate postsPerPage={postsPerPage}
-             totalPosts={dogs.filtered.length==0 ? dogs.dogs.length :dogs.filtered.length}
+             totalPosts={dogs.filtered.length===0 ? doggies.length :dogs.filtered.length}
              paginate={paginate}
              previousPage={previousPage}
              nextPage={nextPage}

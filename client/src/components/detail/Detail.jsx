@@ -7,11 +7,11 @@ import { useParams } from 'react-router';
 
 const DivCard = styled.div`
    border-radius: 25px;
-   border: solid 2px;
+   border: solid 1px;
    display:inline-block;
    padding:5px;
    background-color:white;
-   box-shadow: 0 0 0 0.1rem black;
+    box-shadow: 0 0 0 0.2rem #B4CCC7;
    //position:relative;
    width : 50%;
    margin:5px;
@@ -23,10 +23,8 @@ const InsideCard = styled.div`
    `;
    
 const H2 = styled.h2`
-   background-color : grey;
-   margin:0;
-   font-size: 82%;
-   //position: absolute; left: 10px; top: 300px;
+   margin:3px 0;
+   font-size: 100%;
 `;   
 
 const P = styled.p`
@@ -45,6 +43,17 @@ const IMG = styled.img`
     border-radius: 25px;
     margin-bottom:5px;
 `;
+
+const Span =styled.span`
+font-weight:bold;
+`
+
+const SpanTitle =styled.span`
+font-weight:bold;
+font-size:100%;
+background-color:#A7B6B3;
+font-style:oblique;
+`
 
 const Detail = (props) => {
 
@@ -81,15 +90,14 @@ const Detail = (props) => {
 
     return (
        <DivCard>
-       <h1>Details about the dog</h1>
+       <h1><SpanTitle>{dogDetail[0].name}</SpanTitle></h1>
        <InsideCard>  
             <IMG  src={dogDetail[0].image} alt={dogDetail[0].image} />
-            <h4>{dogDetail[0].id}</h4>
-            <H2>{dogDetail[0].name}</H2>
-            <h4>{dogDetail[0].height} inches</h4>
-            <h4>{dogDetail[0].min_weight} - {dogDetail[0].max_weight} pounds</h4>
-            <P>{newArray.toString()}</P>
-            <h4>{dogDetail[0].life_span}</h4>
+            <P><Span>Id: </Span>{dogDetail[0].id}</P>
+            <P><Span>Height: </Span>{dogDetail[0].height} inches</P>
+            <P><Span>Weight: </Span>{dogDetail[0].min_weight} - {dogDetail[0].max_weight} pounds</P>
+            <P><Span>Temperaments: </Span>{newArray.toString()}</P>
+            <P><Span>Life span: </Span>{dogDetail[0].life_span}</P>
 
          </InsideCard>
       </DivCard>
