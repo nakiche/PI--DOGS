@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import  {getTemperaments}  from '../../actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
 import Validate from './Validate.jsx';
+import { useHistory} from 'react-router-dom';
+
 //import Validation from './Validation.jsx';
 
 
@@ -38,6 +40,7 @@ const Buttons = styled.button`
 
 export default function Form({handleSubmit}) {  
 const dispatch = useDispatch();
+let history = useHistory()
 
 const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
 
@@ -123,6 +126,7 @@ const handleInputChange  = (evento) =>{
   
 //console.log('errors',errors)
    return (
+    <div>
       <DivCard>
         <h1>Create a new dog</h1>
         {/*<InsideCard>   */}
@@ -235,7 +239,14 @@ const handleInputChange  = (evento) =>{
          <Buttons type="submit">Create</Buttons>
          </div>
       </form>
+      
 
       </DivCard>
+      <div>
+      <Buttons onClick={()=>{
+               history.push('/home')
+              }} >Go back</Buttons>  
+      </div>
+     </div> 
    );
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useHistory} from 'react-router-dom';
+import { useHistory,useLocation} from 'react-router-dom';
 
 const SpanTitle =styled.span`
 font-weight:bold;
@@ -19,7 +19,9 @@ const Buttons = styled.button`
 
 export default function Welcome() {  
 let history = useHistory()
-// const location = useLocation()  
+let location = useLocation()
+
+console.log('location',location.hash)
 
    return (
       <div>

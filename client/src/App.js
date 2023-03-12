@@ -5,7 +5,7 @@ import Detail from "./components/detail/Detail.jsx";
 import Form from "./components/form/Form.jsx";
 import Welcome from "./components/welcome/Welcome.jsx";
 import Dogs from "./components/dogs/Dogs.jsx";
-import { Route, HashRouter as Router } from 'react-router-dom';
+import { Route, HashRouter as Router,  useHistory,useLocation } from 'react-router-dom';
 //import {dogs} from "./ExampledB.js"
 import {getDogsByName,createDog,getTemperaments,getDogs,deleteSearch}  from '../src/actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
@@ -13,6 +13,11 @@ import { useDispatch,useSelector } from 'react-redux'
 
 function App() {  
 const dispatch = useDispatch();
+const history = useHistory()
+let location = useLocation()
+
+console.log('location',location)
+
 
 const dogDetailByName  = useSelector((state) =>state.dogByName);
 const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
@@ -46,14 +51,7 @@ React.useEffect(() => {
       async function fetchData() {
        // You can await here
        await dispatch(getTemperaments()); //temperaments
-       //let response =
-
-       // setDogs({
-       //   ...dogs,
-       //   dogs:response.payload
-       //   })
        await dispatch(getDogs()); //dogs
-      
    }
    fetchData();
    },[]);
@@ -61,7 +59,9 @@ React.useEffect(() => {
 
   return (
     <div className='App'>
-     {/*{console.log(location.pathname)}*/}
+   
+    
+
     {/*<div>{ location.pathname ===! '/' && 
       <Nav />
           } 

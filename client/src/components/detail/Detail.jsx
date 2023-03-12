@@ -1,8 +1,9 @@
-import  styled from 'styled-components';
+import styled from 'styled-components';
 import React  from "react";
 import  {getDogsById}  from '../../actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
 import { useParams } from 'react-router';
+import { useHistory} from 'react-router-dom';
 
 
 const DivCard = styled.div`
@@ -55,7 +56,18 @@ background-color:#A7B6B3;
 font-style:oblique;
 `
 
+const Buttons = styled.button`
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px;
+  background-color:grey;
+  color:white;  
+  font-size:1rem;
+  font-family:cursive;
+`;
+
 const Detail = (props) => {
+let history = useHistory()
 
   const dispatch = useDispatch();
   let {id} = useParams();
@@ -89,6 +101,7 @@ const Detail = (props) => {
     }
 
     return (
+       <div>
        <DivCard>
        <h1><SpanTitle>{dogDetail[0].name}</SpanTitle></h1>
        <InsideCard>  
@@ -100,8 +113,16 @@ const Detail = (props) => {
             <P><Span>Life span: </Span>{dogDetail[0].life_span}</P>
 
          </InsideCard>
+         
       </DivCard>
-    );
+      <div>
+      <Buttons onClick={()=>{
+               history.push('/home')
+              }} >Go back</Buttons>  
+      </div>
+    
+      </div> 
+    )
   }else{
     
     return (

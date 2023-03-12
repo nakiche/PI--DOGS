@@ -12,6 +12,7 @@ const Select = styled.select`
    width:18%;
    border-radius:10px;
    `;
+   
 export default function Dogs({dogTemperaments,doggies}) {  
    const dispatch = useDispatch();
 
@@ -65,8 +66,7 @@ export default function Dogs({dogTemperaments,doggies}) {
    const handleSelectTemperamentChange = (e) => {
       console.log (e.target.selectedOptions)
      //let value = Array.from(e.target.selectedOptions, option => option.value);
-     
-
+   
         if (e.target.value  === 'api'){
       //let filtered=dogs.filtered.length==0 ? doggies.filter(e=>e.fromApi===true) : dogs.filtered.filter(e=>e.fromApi===true)
       //filteredData=filteredData.dogs.filter(e=>e.fromApi===true)
@@ -81,7 +81,7 @@ export default function Dogs({dogTemperaments,doggies}) {
       //let filtered=dogs.filtered.length==0 ? doggies.filter(e=>e.fromApi===undefined) : dogs.filtered.filter(e=>e.fromApi===undefined)
       //filteredData=filteredData.dogs.filter(e=>e.fromApi===undefined)
        let filtered=doggies.filter(e=>e.fromApi===undefined)
-       if (filtered.length===0) window.alert('No dogs stored in database')
+       if (filtered.length===0) window.alert('There are no dogs stored in database')
       setDogs({...dogs,
          filtered
       })
@@ -191,11 +191,7 @@ export default function Dogs({dogTemperaments,doggies}) {
    }
 
  }
-
  console.log(dogs)
- 
-
-
  
  // const handleFilter = (data, key, value) => {
     //return data.filter(item => item[key] === value);
@@ -237,27 +233,6 @@ export default function Dogs({dogTemperaments,doggies}) {
          setCurrentPage(currentPage + 1);
       }
    };
-
-  
-
-   
-   // let filtered = ({
-   //                  ...dogs,
-   //                    filtered});
-   
-  // if (job) {
-  //   filteredData = handleFilter(filteredData, "job", job);
-  // }
-  // if (car) {
-  //   filteredData = handleFilter(filteredData, "car", car);
-  // }
-
-      //sort section
-   //const handleSortByOrigin = (e) =>{
- 
-
-
- 
 
     return (
     <div> 
@@ -304,7 +279,7 @@ export default function Dogs({dogTemperaments,doggies}) {
 
         </Select>  
 
-  {dogs ? ( 
+  
      <div className="divDogs">
         {currentPosts && currentPosts.map((c,b)=>
             
@@ -319,20 +294,15 @@ export default function Dogs({dogTemperaments,doggies}) {
            />
          )
         }  
-        <div>
-          <Paginate postsPerPage={postsPerPage}
+          
+        </div>
+         <Paginate postsPerPage={postsPerPage}
              totalPosts={dogs.filtered.length===0 ? doggies.length :dogs.filtered.length}
              paginate={paginate}
              previousPage={previousPage}
              nextPage={nextPage}
-             />  
-         </div>    
-        </div>     
-     ) : (
-        <div className="loading">Loading...</div>
-     
-     )}
-
+             currentPage={currentPage}
+             />
     </div>
     );
   
