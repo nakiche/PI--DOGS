@@ -13,7 +13,6 @@ const DivDogs = styled.div`
 
 const Bloque = styled.div`
   background-color:#B4CCC7;
-  //margin-bottom:15px;
   display:flex;
   justify-content:flex-end;
 `;
@@ -28,12 +27,7 @@ const H4 =styled.h4`
 `;
 
 
-// export default function Nav({onSearch,logout}) {
-
 export default function Nav({onSearch,dogDetailByName,onClose}) {  
-
-
-
 
    const [doggies, setDoggies] = React.useState("");
 
@@ -70,10 +64,6 @@ export default function Nav({onSearch,dogDetailByName,onClose}) {
          )  
       }
     </DivDogs>  
-
-    
     </div>
-
-
    );
 }

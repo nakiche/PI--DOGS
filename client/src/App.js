@@ -5,14 +5,12 @@ import Detail from "./components/detail/Detail.jsx";
 import Form from "./components/form/Form.jsx";
 import Welcome from "./components/welcome/Welcome.jsx";
 import Dogs from "./components/dogs/Dogs.jsx";
-import { Route, HashRouter as Router,  useHistory,useLocation } from 'react-router-dom';
-//import {dogs} from "./ExampledB.js"
+import { Route, HashRouter as Router,useLocation } from 'react-router-dom';
 import {getDogsByName,createDog,getTemperaments,getDogs,deleteSearch}  from '../src/actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
 
 function App() {  
 const dispatch = useDispatch();
-const history = useHistory()
 const location = useLocation()
 
 const dogDetailByName  = useSelector((state) =>state.dogByName);
@@ -34,7 +32,7 @@ let onSearch = async (name)=>{
 }  
 
 let handleSubmit = async(dogData) =>{
-  console.log(dogData)
+
    if (!dogData.name || !dogData.min_life_span || !dogData.max_life_span 
     || !dogData.min_height || !dogData.max_height || !dogData.min_weight 
     || !dogData.max_weight | !dogData.temperament ) {
@@ -42,7 +40,7 @@ let handleSubmit = async(dogData) =>{
     return
   }
    try{
-   let response =await dispatch(createDog(dogData))
+   await dispatch(createDog(dogData))
    window.alert(`Breed: ${dogData.name}, was succesfully created`)
    }catch(e)
    {

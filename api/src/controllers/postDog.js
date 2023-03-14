@@ -38,7 +38,6 @@ var postDog =  async function({id,name,image,min_height,max_height,
 				      				}
 								}
 							})
-		//return `Breed: ${name}, was succesfully created` 
 		return getDog()
 		}catch(e){
 		return {msg:e.message}

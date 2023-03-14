@@ -5,15 +5,11 @@ const UL = styled.ul`
    display: flex;
    list-style:none;
    padding:1px;
-   //flex-wrap:wrap;
-   //justify-content :space-around;
  `;
 
  const DivPaginate = styled.div`
    display: flex;
    justify-content:space-around;
-   //flex-wrap:wrap;
-   //justify-content :space-around;
  `;
  
 const ButtonsExt = styled.button`

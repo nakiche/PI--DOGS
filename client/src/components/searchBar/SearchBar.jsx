@@ -32,8 +32,6 @@ const handleInputChange = (event) => {
         onSearch(dogName);
         setDogName('');
         e.target.reset()
-        // const inputDOM =document.getElementById('task-input');
-        // inputDOM.value='';
         }}>
       <Input type='search' id='task-input' placeholder="Enter a dog breed..." onChange={handleInputChange} />
       <Buttons>Search</Buttons>

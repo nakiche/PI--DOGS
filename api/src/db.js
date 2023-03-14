@@ -6,9 +6,6 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,DB_NAME
 } = process.env;
 
-// const modelDog = require('../src/models/Dog.js');
-// const modelTemperament = require('../src/models/Temperament.js');
-
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -35,13 +32,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-// modelDog(sequelize);
-// modelTemperament(sequelize);
-
 const { Dog,Temperament } = sequelize.models;
 
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
 
 Dog.belongsToMany(Temperament, { through: 'DogTemperament' });
 Temperament.belongsToMany(Dog, { through: 'DogTemperament' });

@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 import { useHistory} from 'react-router-dom';
 
-const SpanTitle =styled.span`
-font-weight:bold;
-font-size:100%;
-background-color:#A7B6B3;
-font-style:oblique;
-`
 const Buttons = styled.button`
   border-radius: 5px;
   margin: 10px;
@@ -22,7 +16,6 @@ let history = useHistory()
 
    return (
       <div>
-       {/*{console.log(location.pathname)}*/}
        <h1>Tommy's Dogs api</h1>
        <Buttons onClick={()=>{
                history.push('/home')

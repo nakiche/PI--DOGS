@@ -25,12 +25,10 @@ describe('Dog model', () => {
   describe("Temperament model", () => {
     it("Temperament model must be defined", () => {
       const TemperamentModel = conn.models.Temperament;
-      //console.log('Temperament',typeOf(Temperament))
       expect(TemperamentModel).to.not.be.undefined;
     });
 
     it("id property can't be null", async () => {
-        //expect.assertions(1);
         try {
           await Temperament.create({ 
                     "name": "Yankee dog",
@@ -41,7 +39,6 @@ describe('Dog model', () => {
       });
 
     it("name property can't be null", async () => {
-        //expect.assertions(1);
         try {
           await Temperament.create({ 
                     "id":2
@@ -60,7 +57,7 @@ describe('Dog model', () => {
     });
 
     it("id property can't be null", async () => {
-        //expect.assertions(1);
+        
         try {
           await Dog.create({
                    "image": "no_image",
@@ -80,7 +77,7 @@ describe('Dog model', () => {
       });
 
     it("name property can't be null", async () => {
-        //expect.assertions(1);
+       
         try {
           await Dog.create({
                    "id":122,
@@ -100,7 +97,7 @@ describe('Dog model', () => {
       });
 
       it("image property can't be null", async () => {
-        //expect.assertions(1);
+       
         try {
           await Dog.create({
                    "id":122,
@@ -120,7 +117,7 @@ describe('Dog model', () => {
       });
 
       it("height property can't be null", async () => {
-        //expect.assertions(1);
+       
         try {
           await Dog.create({
                    "id":122,
@@ -140,7 +137,7 @@ describe('Dog model', () => {
       });
 
         it("min_weight property can't be null", async () => {
-        //expect.assertions(1);
+       
         try {
           await Dog.create({
                    "id":122,
@@ -161,7 +158,7 @@ describe('Dog model', () => {
       });
 
         it("max_weight property can't be null", async () => {
-        //expect.assertions(1);
+      
         try {
           await Dog.create({
                    "id":122,
@@ -182,7 +179,7 @@ describe('Dog model', () => {
       });
 
         it("life_span property can't be null", async () => {
-        //expect.assertions(1);
+        
         try {
           await Dog.create({
                    "id":122,

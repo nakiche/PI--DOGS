@@ -23,11 +23,6 @@ const InsideCard = styled.div`
    flex-direction:column;
    `;
    
-const H2 = styled.h2`
-   margin:3px 0;
-   font-size: 100%;
-`;   
-
 const P = styled.p`
    overflow-wrap: break-word;
    margin:0;
@@ -72,10 +67,10 @@ let history = useHistory()
   const dispatch = useDispatch();
   let {id} = useParams();
 
-  //aqui es como el mapStateToProps
+  //mapStateToProps
     const dogDetail  = useSelector((state) =>state.dogById);
   
-  //este es el component didMount
+  //component didMount
   React.useEffect(() => {
    async function fetchData() {
     // You can await here

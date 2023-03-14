@@ -27,7 +27,6 @@ describe('Dogs routes', () => {
     console.error('Unable to connect to the database:', err);
   }));// Syncing all the models at once.
   beforeEach(() => conn.sync({ force: true }))
-    //.then(() => Dog.create(dog)));
   
 //------------------------------------------------------------
   describe('GET /dogs', () => {

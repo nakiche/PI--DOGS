@@ -6,8 +6,7 @@ var getDog =  async function(){
 	try {
          let dogsApi = [] 
          let dogsDb = []
-     
-        //let response= await axios(`https://api.thedogapi.com/v1/breeds`)
+
         let response= await axios(`https://api.thedogapi.com/v1/breeds/search?q=%`)
         
         dogsApi = response.data.map(res=>{
@@ -15,7 +14,6 @@ var getDog =  async function(){
          
         return ({
          id:res.id,
-         //image:res.image.url,
          image:res.reference_image_id ? `https://cdn2.thedogapi.com/images/${res.reference_image_id}.jpg` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' ,
          name:res.name,
          min_weight:isNaN(parseInt(weightArray[0])) ? 0 : parseInt(weightArray[0]),
@@ -28,7 +26,6 @@ var getDog =  async function(){
          })
 
         dogsDb = await Dog.findAll({
-							//where: {id: {[Op.eq]: id}},
 							include: {model: Temperament,
 							attributes: ['name'],
 							through: {

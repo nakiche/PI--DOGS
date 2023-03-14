@@ -5,8 +5,6 @@ import { useDispatch,useSelector } from 'react-redux'
 import Validate from './Validate.jsx';
 import { useHistory} from 'react-router-dom';
 
-//import Validation from './Validation.jsx';
-
 
 const DivCard = styled.div`
    border-radius: 25px;
@@ -18,15 +16,6 @@ const DivCard = styled.div`
    position:relative;
    width:50%;
 `;
-
-// const InsideCard = styled.div`
-//    display: flex;
-//    flex-wrap:wrap;
-//    flex-direction:row;
-//    justify-content: space-between;
-//    padding:15px;
-//    margin:15px;
-//    `;
 
 const Buttons = styled.button`
   border-radius: 5px;
@@ -46,7 +35,6 @@ const SubmitButton = styled.button`
   color:white;  
   font-size:1rem;
   font-family:cursive;
-  //pointer-events:none;
 `;
 
 export default function Form({handleSubmit}) {  
@@ -109,19 +97,9 @@ const handleInputChange  = (evento) =>{
   );
  } 
 
- // const validation  = (dogData) =>{
- //  setErrors(
- //   Validation({
- //      dogData
-   
- //   })
- //  );
- // } 
-
  const handleSelectChange = (e) => {
   let value = Array.from(e.target.selectedOptions, option => option.value);
-  //console.log(value)
-  //this.setState({values: value});
+
   setDogData({
       ...dogData,
    temperament:value
@@ -135,12 +113,11 @@ const handleInputChange  = (evento) =>{
   );
 }
   
-//console.log('errors',errors)
    return (
     <div>
       <DivCard>
         <h1>Create a new dog</h1>
-        {/*<InsideCard>   */}
+    
         <form onSubmit={(e)=>{
               e.preventDefault();
               //validation(dogData)
@@ -230,30 +207,19 @@ const handleInputChange  = (evento) =>{
                     {/*<option value="Temperaments" disabled>choose temeperaments</option>*/}
                     {dogTemperaments && dogTemperaments.map((c,b)=>
                         <option value={c} key={b}>{c}</option>
-                     )} 
-                    
+                     )}             
             </select>
             <p style={{fontSize: '15px',color: 'red'}}>{errors.temperament}</p> 
           </div>
          
-        {/*</InsideCard>*/}
         <div>
-          {/*  <input  disabled= "{dogData.name && dogData.min_life_span &&
-                                dogData.max_life_span&& dogData.min_height &&
-                                dogData.max_height && dogData.min_weight &&                               
-                                 dogData.max_weight && dogData.temperament &&
-                                ? false : true}" type='submit' value='Save'
-            />*/}
-
-          {/*<input type="submit" />
-         */}
+        
          <SubmitButton type="submit" disabled={dogData.name && dogData.min_life_span && dogData.max_life_span 
-      && dogData.min_height && dogData.max_height && dogData.min_weight 
+        && dogData.min_height && dogData.max_height && dogData.min_weight 
         && dogData.max_weight && dogData.temperament.length!==0 ? false : true}>Create</SubmitButton>
          </div>
       </form>
       
-
       </DivCard>
       <div>
       <Buttons onClick={()=>{

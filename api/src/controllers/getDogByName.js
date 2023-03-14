@@ -15,7 +15,6 @@ var getDogByName =  async function(dogName){
          id:res.id,
          image:res.reference_image_id ? `https://cdn2.thedogapi.com/images/${res.reference_image_id}.jpg` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' ,
          name:res.name,
-         //height:res.height.metric,
          min_weight:isNaN(parseInt(weightArray[0])) ? 0 : parseInt(weightArray[0]),
          max_weight:isNaN(parseInt(weightArray[1])) ? 0 : parseInt(weightArray[1]),
          height:res.height.metric,

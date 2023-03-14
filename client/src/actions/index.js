@@ -8,7 +8,7 @@ export const CREATE_DOG = 'CREATE_DOG';
 //export const SORT_BY_ORIGIN = 'SORT_BY_ORIGIN'
 export const DELETE_SEARCH = 'DELETE_SEARCH'
 
-//inicializamos en 1000 para que los perros creados tengan
+//inicializamos en 999 para que los perros creados tengan
 //id mayor a 1000
 let id = 999;
 
@@ -29,7 +29,6 @@ export const getDogs  = () => {
 
 export const getDogsById  = (id) => {
   console.log('GET_DOGS_ID')
-
     // Completa la funcion
     return async (dispatch)=>{
       
@@ -45,7 +44,6 @@ export const getDogsById  = (id) => {
 
 export const getDogsByName  = (name) => {
   console.log('GET_DOGS_NAME')
-
     // Completa la funcion
     return async (dispatch)=>{
       
@@ -61,7 +59,6 @@ export const getDogsByName  = (name) => {
 
 export const getTemperaments  = () => {
   console.log('GET_TEMPERAMENTS')
-
     // Completa la funcion
     return async (dispatch)=>{
       
@@ -97,23 +94,12 @@ export const createDog  = (dogData) => {
       let response = await axios.post(`http://localhost:3001/dogs`,objeto);
       let data = response.data;
       
-
     return dispatch({
       type:CREATE_DOG,
       payload:data
     })
   }
 };
-
-// export const sortByOrigin  = (SortBy) => {
-//   console.log('SORT_BY_ORIGIN')
-
-   
-//     return ({
-//       type:SORT_BY_ORIGIN,
-//       payload:SortBy
-//     })
-// };
 
 export const deleteSearch = (id) => {
    console.log('DELETE_SEARCH')

@@ -8,7 +8,6 @@ const initialState = {
 	dogTemperaments:[]
 }
 
-
 function rootReducer(state = initialState,action){
 	if(action.type===GET_DOGS){
 		return{
@@ -42,12 +41,8 @@ function rootReducer(state = initialState,action){
 	}
 
 	if(action.type===DELETE_SEARCH){
-		// console.log(action.payload)
-		// let indice= state.dogByName.findIndex(e=>e.id===action.payload)
-		// console.log(indice)
 		return{
 			...state,
-			//dogByName:state.dogByName.splice(1,1) 
 			dogByName:state.dogByName.filter(e=>e.id!==action.payload) 
 		}
 	}

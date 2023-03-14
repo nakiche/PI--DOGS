@@ -1,9 +1,8 @@
 const regexName = /^[a-zA-Z]+$/
 
 export default function Validate(inputs) {
- var errors = {};
+var errors = {};
 
- //console.log(inputs.username.length)
 //name validation
  if (!inputs.name) {
    errors.name = 'Name is required';
