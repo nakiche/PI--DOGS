@@ -47,7 +47,6 @@ const ButtonsActual = styled.button`
 `;
 
 const Paginate = ({ postsPerPage, totalPosts, paginate, previousPage, nextPage,currentPage }) => {
-   console.log('currentPage',currentPage)
 
    const pageNumbers = [];
  

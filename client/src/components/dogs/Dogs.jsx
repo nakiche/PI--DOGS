@@ -16,8 +16,6 @@ const Select = styled.select`
 export default function Dogs({dogTemperaments,doggies}) {  
    const dispatch = useDispatch();
 
-   //redux store
-   //const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
    //component states
    const [dogs, setDogs] = React.useState({dogs:"",
                                            filtered:[],
@@ -61,6 +59,14 @@ export default function Dogs({dogTemperaments,doggies}) {
    // fetchData();
    // },[doggies]);
 
+   // React.useEffect(() => {
+   //    async function fetchData() {
+   //     // You can await here
+   //     await dispatch(getDogs()); //
+   // }
+   // fetchData();
+   // },[]);
+
    
 
    const handleSelectTemperamentChange = (e) => {
@@ -103,7 +109,7 @@ export default function Dogs({dogTemperaments,doggies}) {
    //using UseEffect to get lastest state
    React.useEffect(() => {
     let filterByTemperament=[]  
-   console.log('Temperaments to filter',temperament );
+  
       for (let i = 0; i < doggies.length; i++) {
          let arraySearch=doggies[i].Temperaments[0].name
           //const found = temperament.some(r=> arraySearch.includes(r)) && filterByTemperament.push(doggies[i])
@@ -191,7 +197,6 @@ export default function Dogs({dogTemperaments,doggies}) {
    }
 
  }
- console.log(dogs)
  
  // const handleFilter = (data, key, value) => {
     //return data.filter(item => item[key] === value);
@@ -203,23 +208,13 @@ export default function Dogs({dogTemperaments,doggies}) {
    //filteredData = handleSortByOrigin("api");
   //}
 
-  
-  // let filtered ={}
-
-  //  if (api_Db) {
-  //   //filtered = handleSortByOrigin(api_Db)
-  //     handleSortByOrigin(api_Db)
-  //   // setDogs({
-  //   //       ...dogs,
-  //   //       filtered})
-  // }
-
+console.log(doggies)
   //pagination variables
    const indexOfLastPost = currentPage * postsPerPage;
    const indexOfFirstPost = indexOfLastPost - postsPerPage;
    const currentPosts = dogs.filtered.length===0 ? doggies.slice(indexOfFirstPost, indexOfLastPost) : dogs.filtered.slice(indexOfFirstPost, indexOfLastPost)
 
-   //console.log(dogs)
+ 
   const paginate =  (pageNumber) => {
        setCurrentPage(pageNumber);
    };

@@ -1,5 +1,3 @@
-//const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-//const regexPass= /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}$/
 const regexName = /^[a-zA-Z]+$/
 
 export default function Validate(inputs) {
@@ -64,8 +62,8 @@ if (!inputs.max_weight) {
    errors.max_weight = 'Maximun weight is required';
 }else if (inputs.max_weight < 8) {
    errors.max_weight = 'Must be 8 pounds or more';
-}else if (inputs.max_weight > 91  ) {
-   errors.max_weight = 'Must be less than 92 pounds';
+}else if (inputs.max_weight > 110  ) {
+   errors.max_weight = 'Must be less than 111 pounds';
 }
 
 //temperaments validation
@@ -73,11 +71,6 @@ console.log(inputs.temperament.length)
 if (inputs.temperament.length<1) {
    errors.temperament = 'At least one temperament must be selected';
 }
-
-
-// if (!regexPass.test(inputs.password)){
-//   errors.password = 'Debe contener al menos un numero y entre 6 y 10 caracteres';
-// }
 
 return errors;
 }

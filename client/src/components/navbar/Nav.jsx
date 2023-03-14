@@ -41,15 +41,6 @@ export default function Nav({onSearch,dogDetailByName,onClose}) {
    setDoggies(dogDetailByName)
    }, [dogDetailByName]);
    
-   //  let onClose =  (id)=>{
-   //    console.log(doggies)
-   //    // let indice= doggies.findIndex(e=>e.id===id)
-   //    // doggies.splice(indice,1)
-   //    //setDoggies(doggies)
-   //    setDoggies(doggies.filter(c => c.id !== id))
-   //    let indice= doggies.findIndex(e=>e.id===id)
-   //    doggies.splice(indice,1)
-   // }  
 
    return (
  <div className="">
@@ -62,7 +53,6 @@ export default function Nav({onSearch,dogDetailByName,onClose}) {
       </Link>   
      
     <SearchBar 
-          //onSearch={(characterID) => window.alert(characterID)}
           onSearch={onSearch}
         />
    </Bloque>    

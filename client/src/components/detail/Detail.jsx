@@ -93,7 +93,7 @@ let history = useHistory()
     
  if(Object.entries(dogDetail).length>0){
     let newArray=[]
-    if (dogDetail[0].Temperaments.length > 0 )
+    if (dogDetail[0].Temperaments.length !== 0 )
       {
        newArray =dogDetail[0].Temperaments.map(e=> e.name)
       }else{

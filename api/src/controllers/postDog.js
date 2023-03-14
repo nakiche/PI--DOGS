@@ -1,4 +1,6 @@
 const {Dog,Temperament,Op}  = require('../db.js');
+const getDog  = require('./getDog.js');
+
 
 var postDog =  async function({id,name,image,min_height,max_height,
 		min_weight,max_weight,min_life_span,
@@ -9,7 +11,7 @@ var postDog =  async function({id,name,image,min_height,max_height,
  	|| !min_weight || !max_weight || !min_life_span 
  	|| !max_life_span || !temperament || temperament.length < 1 ) {
  		
-	throw new Error ('Faltan datos')
+	throw new Error ('Data missing')
  	}else{
 	try{
 		let dog = await  Dog.create({
@@ -36,7 +38,8 @@ var postDog =  async function({id,name,image,min_height,max_height,
 				      				}
 								}
 							})
-		return `Breed: ${name}, was succesfully created` 
+		//return `Breed: ${name}, was succesfully created` 
+		return getDog()
 		}catch(e){
 		return {msg:e.message}
 	}

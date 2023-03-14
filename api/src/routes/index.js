@@ -16,7 +16,7 @@ router.get('/dogs/name', async (req, res) => {
 		if (dog.length>0){
 			res.status(200).json(dog);
 		}else{
-			res.status(400).json({error:'no existe el perro indicado'});
+			res.status(400).json({error:'there are no dogs with that name'});
 		}
 	}catch(e)
 	{
@@ -42,7 +42,7 @@ router.get('/dogs/:idRaza', async (req, res) => {
 		if(newArray.length>0) {
 			res.status(200).json(dog.filter(c=>c.id==idRaza)); 
 		}else{
-			res.status(400).json({error:'no existe el perro'});
+			res.status(400).json({error:`No dogs with the id: ${idRaza}`});
 		}
 
 	}catch(e)

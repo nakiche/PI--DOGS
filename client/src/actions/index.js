@@ -19,7 +19,7 @@ export const getDogs  = () => {
     	
       let response = await axios.get(`http://localhost:3001/dogs`);
       let data = response.data;
-    
+      
     return dispatch({
       type:GET_DOGS,
       payload:data
@@ -96,6 +96,7 @@ export const createDog  = (dogData) => {
       
       let response = await axios.post(`http://localhost:3001/dogs`,objeto);
       let data = response.data;
+      
 
     return dispatch({
       type:CREATE_DOG,

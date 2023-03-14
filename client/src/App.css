@@ -4,6 +4,25 @@
   font-family: cursive;
 }
 
+input {
+  font-family: cursive;
+}
+
+button:disabled {
+  
+   opacity: 0.3;
+}
+
+button:hover {
+      background-color: #2F3131;
+      transition: 0.8s;
+  }
+
+input::placeholder {
+    font-family: cursive;
+    opacity: 0.5;
+}
+
 li {
  margin:2px;
  text-decoration: none;

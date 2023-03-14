@@ -10,33 +10,40 @@ import { Route, HashRouter as Router,  useHistory,useLocation } from 'react-rout
 import {getDogsByName,createDog,getTemperaments,getDogs,deleteSearch}  from '../src/actions/index.js';
 import { useDispatch,useSelector } from 'react-redux'
 
-
 function App() {  
 const dispatch = useDispatch();
 const history = useHistory()
-let location = useLocation()
-
-console.log('location',location)
-
+const location = useLocation()
 
 const dogDetailByName  = useSelector((state) =>state.dogByName);
 const dogTemperaments  = useSelector((state) =>state.dogTemperaments);
 const doggies  = useSelector((state) =>state.dogs);
 
 let onSearch = async (name)=>{
+  name = name.trim()
+  if (!name) {
+    window.alert('Please enter a dog name')
+    return
+  }
     try{
       await dispatch(getDogsByName(name));
     }catch(e)
     {
-      window.alert(e)
+      window.alert(`No dogs found with the name "${name}"`)
     }
 }  
 
 let handleSubmit = async(dogData) =>{
-  //dispachar la accion de REDUX 
+  console.log(dogData)
+   if (!dogData.name || !dogData.min_life_span || !dogData.max_life_span 
+    || !dogData.min_height || !dogData.max_height || !dogData.min_weight 
+    || !dogData.max_weight | !dogData.temperament ) {
+    window.alert('All values are required ')
+    return
+  }
    try{
    let response =await dispatch(createDog(dogData))
-   window.alert(response.payload)
+   window.alert(`Breed: ${dogData.name}, was succesfully created`)
    }catch(e)
    {
     window.alert(e)
@@ -56,48 +63,30 @@ React.useEffect(() => {
    fetchData();
    },[]);
 
-
   return (
-    <div className='App'>
-   
-    
-
-    {/*<div>{ location.pathname ===! '/' && 
-      <Nav />
+  <div className='App'>
+   <Router>
+    <div>{ location.hash !== '#/' && 
+      <Nav onSearch={onSearch} dogDetailByName={dogDetailByName} onClose={onClose}  />
           } 
-    </div>   */}
-    {/*configurar el componente Nav condicional*/}
-    
-    <Router>
-
+    </div>   
       <Route exact path="/">
-       <Welcome />
+       <Welcome  />
       </Route>
-    
-      <Route path="/home">
-       
-         <Nav onSearch={onSearch} dogDetailByName={dogDetailByName} onClose={onClose}  />
+      <Route exact path="/home">
          <hr />
-        
           <Dogs dogTemperaments={dogTemperaments} doggies={doggies} />
-        
       </Route>
-
       <Route path="/detail/:id">
-        <Nav onSearch={onSearch}/>
         <hr />
         <Detail />
       </Route>
-
       <Route path="/form">
-        <Nav onSearch={onSearch}/>
         <hr />
         <Form handleSubmit={handleSubmit}/>
       </Route>
-
     </Router>
-     
-    </div>
+  </div>
   );
 }
 

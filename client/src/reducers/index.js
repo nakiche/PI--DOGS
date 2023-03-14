@@ -52,13 +52,6 @@ function rootReducer(state = initialState,action){
 		}
 	}
 
-	// if(action.type===SORT_BY_ORIGIN){
-	// 	let originArr = state.dogs.filter(e=>e.fromApi===true)
-	// 	return{
-	// 		...state,
-	// 		dogs:originArr //
-	// 	}
-	// }
 	return {...state}
 }
 

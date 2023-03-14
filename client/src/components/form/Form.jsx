@@ -38,6 +38,17 @@ const Buttons = styled.button`
   font-family:cursive;
 `;
 
+const SubmitButton = styled.button`
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px;
+  background-color:grey;
+  color:white;  
+  font-size:1rem;
+  font-family:cursive;
+  //pointer-events:none;
+`;
+
 export default function Form({handleSubmit}) {  
 const dispatch = useDispatch();
 let history = useHistory()
@@ -236,7 +247,9 @@ const handleInputChange  = (evento) =>{
 
           {/*<input type="submit" />
          */}
-         <Buttons type="submit">Create</Buttons>
+         <SubmitButton type="submit" disabled={dogData.name && dogData.min_life_span && dogData.max_life_span 
+      && dogData.min_height && dogData.max_height && dogData.min_weight 
+        && dogData.max_weight && dogData.temperament.length!==0 ? false : true}>Create</SubmitButton>
          </div>
       </form>
       
