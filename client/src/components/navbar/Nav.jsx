@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from 'styled-components';
 import SearchBar from '../searchBar/SearchBar.jsx'
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import NavCard from './NavCard.jsx';
 
 const DivDogs = styled.div`
@@ -28,8 +28,9 @@ const H4 =styled.h4`
 
 
 export default function Nav({onSearch,dogDetailByName,onClose}) {  
-
-   const [doggies, setDoggies] = React.useState("");
+  const location = useLocation()
+  
+  const [doggies, setDoggies] = React.useState("");
 
    React.useEffect(() => {
    setDoggies(dogDetailByName)
@@ -50,6 +51,8 @@ export default function Nav({onSearch,dogDetailByName,onClose}) {
           onSearch={onSearch}
         />
    </Bloque>    
+
+  {/*{ location.pathname === '/home' && */}
    <DivDogs>   
       {doggies && doggies.map((c,b)=>     
              <NavCard key={b}
@@ -64,6 +67,7 @@ export default function Nav({onSearch,dogDetailByName,onClose}) {
          )  
       }
     </DivDogs>  
+  {/*}*/}
     </div>
    );
 }

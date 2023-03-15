@@ -99,7 +99,7 @@ const handleInputChange  = (evento) =>{
 
  const handleSelectChange = (e) => {
   let value = Array.from(e.target.selectedOptions, option => option.value);
-
+  
   setDogData({
       ...dogData,
    temperament:value
@@ -120,7 +120,6 @@ const handleInputChange  = (evento) =>{
     
         <form onSubmit={(e)=>{
               e.preventDefault();
-              //validation(dogData)
               handleSubmit(dogData);
               setDogData({name: '', 
               min_life_span: '' ,
@@ -216,7 +215,7 @@ const handleInputChange  = (evento) =>{
         
          <SubmitButton type="submit" disabled={dogData.name && dogData.min_life_span && dogData.max_life_span 
         && dogData.min_height && dogData.max_height && dogData.min_weight 
-        && dogData.max_weight && dogData.temperament.length!==0 ? false : true}>Create</SubmitButton>
+        && dogData.max_weight && dogData.temperament.length!==0 ? false : true}>Create dog</SubmitButton>
          </div>
       </form>
       
