@@ -13,61 +13,61 @@ var errors = {};
 }
 
 //min_life_span validation
-if (!inputs.min_life_span) {
+if (inputs.name.length>2 && !inputs.min_life_span) {
    errors.min_life_span = 'Minimun life span is required';
-}else if (inputs.min_life_span < 6) {
+}else if (inputs.name.length>2 && inputs.min_life_span < 6) {
    errors.min_life_span = 'Must be 6 year or more';
-}else if (inputs.min_life_span > 13  ) {
+}else if (inputs.name.length>2 && inputs.min_life_span > 13  ) {
    errors.min_life_span = 'Must be less than 14 years';
 }   
 
 //max_life_span validation
-if (!inputs.max_life_span) {
+if (inputs.min_life_span.length>0 && !inputs.max_life_span) {
    errors.max_life_span = 'Maximun life span is required';
-}else if (inputs.max_life_span < 8) {
+}else if (inputs.min_life_span.length>0 && inputs.max_life_span < 8) {
    errors.max_life_span = 'Must be 8 year or more';
-}else if (inputs.max_life_span > 20  ) {
+}else if (inputs.min_life_span.length>0 && inputs.max_life_span > 20  ) {
    errors.max_life_span = 'Must be less than 21 years';
 }    
 
 //min_height validation
-if (!inputs.min_height) {
+if (inputs.max_life_span.length>0 && !inputs.min_height) {
    errors.min_height = 'Minimun height is required';
-}else if (inputs.min_height < 15) {
+}else if (inputs.max_life_span.length>0 && inputs.min_height < 15) {
    errors.min_height = 'Must be 15 inches or more';
-}else if (inputs.min_height > 76  ) {
+}else if (inputs.max_life_span.length>0 &&inputs.min_height > 76  ) {
    errors.min_height = 'Must be less than 77 inches';
 }  
 
 //max_height validation
-if (!inputs.max_height) {
+if (inputs.min_height.length>1 && !inputs.max_height) {
    errors.max_height = 'Maximun height is required';
-}else if (inputs.max_height < 15) {
+}else if (inputs.min_height.length>1 &&inputs.max_height < 15) {
    errors.max_height = 'Must be 23 inches or more';
-}else if (inputs.max_height > 90  ) {
+}else if (inputs.min_height.length>1 && inputs.max_height > 90  ) {
    errors.max_height = 'Must be less than 90 inches';
 }    
 
 //min_weight validation
-if (!inputs.min_weight) {
+if (inputs.max_height.length>1 && !inputs.min_weight) {
    errors.min_weight = 'Minimun weight is required';
-}else if (inputs.min_weight < 6) {
+}else if (inputs.max_height.length>1 && inputs.min_weight < 6) {
    errors.min_weight = 'Must be 15 pounds or more';
-}else if (inputs.min_weight > 59  ) {
+}else if (inputs.max_height.length>1 && inputs.min_weight > 59  ) {
    errors.min_weight = 'Must be less than 60 pounds';
 }  
 
 //max_weight validation
-if (!inputs.max_weight) {
+if (inputs.min_weight.length>0 && !inputs.max_weight) {
    errors.max_weight = 'Maximun weight is required';
-}else if (inputs.max_weight < 8) {
+}else if (inputs.min_weight.length>0 && inputs.max_weight < 8) {
    errors.max_weight = 'Must be 8 pounds or more';
-}else if (inputs.max_weight > 110  ) {
+}else if (inputs.min_weight.length>0 && inputs.max_weight > 110  ) {
    errors.max_weight = 'Must be less than 111 pounds';
 }
 
 //temperaments validation
-if (inputs.temperament.length<1) {
+if (inputs.max_weight.length>0 && inputs.temperament.length<1) {
    errors.temperament = 'At least one temperament must be selected';
 }
 

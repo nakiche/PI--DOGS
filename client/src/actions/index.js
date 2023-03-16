@@ -6,6 +6,8 @@ export const GET_DOGS_NAME = 'GET_DOGS_NAME';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 export const CREATE_DOG = 'CREATE_DOG';
 export const DELETE_SEARCH = 'DELETE_SEARCH'
+export const CURRENT_PAGE = 'CURRENT_PAGE'
+export const NEX_PREV_PAGE = 'NEX_PREV_PAGE'
 
 //inicializamos en 999 para que los perros creados tengan
 //id mayor a 1000
@@ -107,6 +109,21 @@ export const deleteSearch = (id) => {
       type:DELETE_SEARCH,
       payload:id
     })
+}
+ export const getCurrentPage = (page) => {
+   console.log('CURRENT_PAGE')
+  // Completa la funcion
+    return ({
+      type:CURRENT_PAGE,
+      payload:page
+    })   
+}
 
-
+export const nextPrevPag = (action) => {
+   console.log('NEX_PREV_PAGE')
+  // Completa la funcion
+    return ({
+      type:NEX_PREV_PAGE,
+      payload:action
+    })   
 }

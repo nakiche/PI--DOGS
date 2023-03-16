@@ -52,7 +52,7 @@ let cleanState=()=>{
 let onSearch = async (name)=>{
   name = name.trim()
   if (!name) {
-    setErrors('Please enter a dog name')
+    setErrors("Please enter breed's name")
     setTimeout(cleanState, 3000);
     return
   }
@@ -69,7 +69,7 @@ let validateName = (name) =>{
    let nameCapitalized = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1);
 
    if (doggies.some(e => e.name.toLowerCase() === name.toLowerCase())) {
-    setErrors(`The breed: ${nameCapitalized} already exists in the database`)
+    setErrors(`The breed "${nameCapitalized}" already exists in the database`)
     setTimeout(cleanState, 3000);
     return true
    } 

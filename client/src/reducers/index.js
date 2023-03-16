@@ -1,11 +1,12 @@
-import{ GET_DOGS,GET_DOGS_ID,GET_DOGS_NAME,GET_TEMPERAMENTS,CREATE_DOG,DELETE_SEARCH} from "../actions/index.js";
+import{ GET_DOGS,GET_DOGS_ID,GET_DOGS_NAME,GET_TEMPERAMENTS,CREATE_DOG,DELETE_SEARCH,CURRENT_PAGE,NEX_PREV_PAGE} from "../actions/index.js";
 
 
 const initialState = {
 	dogs: [],
 	dogById:[],
 	dogByName:[],
-	dogTemperaments:[]
+	dogTemperaments:[],
+	currentPage:1
 }
 
 function rootReducer(state = initialState,action){
@@ -44,6 +45,20 @@ function rootReducer(state = initialState,action){
 		return{
 			...state,
 			dogByName:state.dogByName.filter(e=>e.id!==action.payload) 
+		}
+	}
+
+	if(action.type===CURRENT_PAGE){
+		return{
+			...state,
+			currentPage:action.payload
+		}
+	}
+
+	if(action.type===NEX_PREV_PAGE){
+		return{
+			...state,
+			currentPage:action.payload==='next'?state.currentPage+1:state.currentPage-1
 		}
 	}
 
