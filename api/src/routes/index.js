@@ -37,14 +37,14 @@ router.get('/dogs', async (req, res) => {
 router.get('/dogs/:idRaza', async (req, res) => {
 	try {
 		let{idRaza}=req.params
-		let dog = await getDog()
-		let newArray =dog.filter(c=>c.id==idRaza)
+		dogs = await getDog()
+		let newArray =dogs.filter(c=>c.id==idRaza)
 		if(newArray.length>0) {
-			res.status(200).json(dog.filter(c=>c.id==idRaza)); 
+			//res.status(200).json(dogs.filter(c=>c.id==idRaza)); 
+			res.status(200).json(dogs.filter(c=>c.id==idRaza)); 
 		}else{
 			res.status(400).json({error:`No dogs with the id: ${idRaza}`});
 		}
-
 	}catch(e)
 	{
 		res.status(400).json(e.message);

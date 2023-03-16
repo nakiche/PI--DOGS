@@ -5,7 +5,6 @@ export const GET_DOGS_ID = 'GET_DOGS_ID';
 export const GET_DOGS_NAME = 'GET_DOGS_NAME';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 export const CREATE_DOG = 'CREATE_DOG';
-//export const SORT_BY_ORIGIN = 'SORT_BY_ORIGIN'
 export const DELETE_SEARCH = 'DELETE_SEARCH'
 
 //inicializamos en 999 para que los perros creados tengan

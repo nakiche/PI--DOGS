@@ -11,6 +11,7 @@ var errors = {};
 }else if (!regexName.test(inputs.name)) { //a-Z checking
    errors.name = 'Invalid name given';
 }
+
 //min_life_span validation
 if (!inputs.min_life_span) {
    errors.min_life_span = 'Minimun life span is required';
@@ -66,7 +67,6 @@ if (!inputs.max_weight) {
 }
 
 //temperaments validation
-console.log(inputs.temperament.length)
 if (inputs.temperament.length<1) {
    errors.temperament = 'At least one temperament must be selected';
 }

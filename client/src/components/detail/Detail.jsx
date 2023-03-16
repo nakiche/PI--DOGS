@@ -34,7 +34,7 @@ const P = styled.p`
 const IMG = styled.img`
     max-width: 100%;
     //width: 200px;
-    height: 200px;
+    height: 300px;
     object-fit: contain;
     border-radius: 25px;
     margin-bottom:5px;

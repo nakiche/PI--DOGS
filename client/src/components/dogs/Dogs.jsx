@@ -10,13 +10,24 @@ const Select = styled.select`
    width:18%;
    border-radius:10px;
    `;
-   
+
+const DivError = styled.div`
+   margin :5px;
+   color: red;
+   font-size:1rem;
+`;
+
 export default function Dogs({dogTemperaments,doggies}) {  
+
+    let cleanState=()=>{
+      setErrors('')
+    }
 
    //component states
    const [dogs, setDogs] = React.useState({dogs:"",
                                            filtered:[],
                                          });
+   const [errors, setErrors] = React.useState('')
    //pagination states
    const [currentPage, setCurrentPage] = React.useState(1);
    const [postsPerPage] = React.useState(8);
@@ -37,7 +48,10 @@ export default function Dogs({dogTemperaments,doggies}) {
       })
     } else if (e.target.value === 'db'){
        let filtered=doggies.filter(e=>e.fromApi===undefined)
-       if (filtered.length===0) window.alert('There are no dogs stored in database')
+       if (filtered.length===0) {
+        setErrors(`There are no dogs stored in database`)
+        setTimeout(cleanState, 3000);
+        }
       setDogs({...dogs,
          filtered
       })
@@ -119,6 +133,7 @@ export default function Dogs({dogTemperaments,doggies}) {
 
     return (
     <div> 
+    {errors && <DivError >{errors}</DivError>}  
     <span>Please choose: </span>
     <Select name="temperaments" id="" multiple size="5" onChange={(e)=>{
          e.preventDefault();

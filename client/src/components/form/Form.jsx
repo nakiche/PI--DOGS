@@ -37,7 +37,7 @@ const SubmitButton = styled.button`
   font-family:cursive;
 `;
 
-export default function Form({handleSubmit}) {  
+export default function Form({handleSubmit,validateName}) {  
 const dispatch = useDispatch();
 let history = useHistory()
 
@@ -82,12 +82,32 @@ const [dogData, setDogData] = React.useState({
 });
 
 
-const handleInputChange  = (evento) =>{
+// const handleInputNameChange  = (evento) =>{
+//   setDogData({
+//       ...dogData,
+//      name: evento.target.value, // Sintaxis ES6 para actualizar la key correspondiente
+//     });
+
+//   validateName(evento.target.value)
+
+//   setErrors(
+//    Validate({
+//       ...dogData,
+//       name: evento.target.value,
+//    })
+//   );
+//  } 
+
+ const handleInputChange  = (evento) =>{
+
+  if(evento.target.name=='name') {
+    validateName(evento.target.value)  
+ }
+
   setDogData({
       ...dogData,
      [evento.target.name]: evento.target.value, // Sintaxis ES6 para actualizar la key correspondiente
     });
-
 
   setErrors(
    Validate({
@@ -121,7 +141,8 @@ const handleInputChange  = (evento) =>{
         <form onSubmit={(e)=>{
               e.preventDefault();
               handleSubmit(dogData);
-              setDogData({name: '', 
+              if (!validateName(dogData.name)){
+               setDogData({name: '', 
               min_life_span: '' ,
               max_life_span:'',
               min_height:'',
@@ -130,6 +151,7 @@ const handleInputChange  = (evento) =>{
               max_weight:'',
               temperament:'',});
               e.target.reset();
+              }
             }}>
          <div>
             <label htmlFor="">Name:</label>
